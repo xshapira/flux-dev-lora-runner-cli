@@ -1,3 +1,9 @@
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "replicate",
+# ]
+# ///
 import argparse
 import pathlib
 import re
