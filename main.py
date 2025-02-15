@@ -1,3 +1,4 @@
+import argparse
 import pathlib
 import re
 import uuid
@@ -51,7 +52,21 @@ def save_images(images: Iterator[Any], prompt: str, output_dir: str = "output") 
 
 
 def main() -> None:
-    pass
+    parser = argparse.ArgumentParser()
+    parser.add_argument("prompt", help="prompt for the photo")
+    parser.add_argument(
+        "--model", default=DEFAULT_MODEL, help="Model to use (default: %(default)s)"
+    )
+    parser.add_argument(
+        "--count",
+        default=DEFAULT_COUNT,
+        help="Number of photos to generate (default: %(default)s)",
+        type=int,
+    )
+    args = parser.parse_args()
+
+    generated_images = generate_images(args.prompt, args.model, args.count)
+    save_images(generated_images, args.prompt)
 
 
 if __name__ == "__main__":
