@@ -1,0 +1,39 @@
+[project]
+name = "ai-images"
+version = "0.0.2"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["replicate>=1.0.4"]
+
+[tool.uv]
+dev-dependencies = ["ruff>=0.9.5", "basedpyright>=1.27.0", "snoop>=0.6.0"]
+
+[tool.basedpyright]
+typeCheckingMode = "off"
+
+[tool.ruff]
+line-length = 88
+exclude = ['.git', '__pycache__', '__init__.py', '.mypy_cache', '.pytest_cache']
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = [
+  "E",  # pycodestyle errors
+  "W",  # pycodestyle warnings
+  "F",  # pyflakes
+  "I",  # isort
+  "C4", # flake8-comprehensions
+  "B",  # flake8-bugbear
+  "UP", # pyupgrade
+]
+ignore = [
+  "E501", # line too long
+  "C901", # Comprehension is too complex (11 > 10)
+  "W191", # indentation contains tabs
+]
+unfixable = ["F841"]
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
