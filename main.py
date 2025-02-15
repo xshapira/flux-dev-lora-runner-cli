@@ -7,6 +7,10 @@ from typing import Any, TypedDict
 
 import replicate
 
+from logger import setup_logger
+
+log = setup_logger(__name__)
+
 DEFAULT_MODEL = "xshapira/me-v1"
 DEFAULT_COUNT = 1
 
@@ -48,7 +52,7 @@ def save_images(images: Iterator[Any], prompt: str, output_dir: str = "output") 
         file_path = output_path / f"{prompt_slug}-{file_id}.webp"
         with open(file_path, "wb") as file:
             file.write(item)  # pyright: ignore [reportAny, reportUnusedCallResult]
-            print(f"Saved photo {file_path}")
+            log.info(f"Saved photo {file_path}")
 
 
 def main() -> None:
