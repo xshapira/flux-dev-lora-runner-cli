@@ -1,6 +1,7 @@
 playground.*
 images/
 notebook*.ipynb
+typings/
 
 *.DS_Store
 
