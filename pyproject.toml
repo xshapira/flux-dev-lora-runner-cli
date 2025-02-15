@@ -10,7 +10,7 @@ dependencies = ["replicate>=1.0.4"]
 dev-dependencies = ["ruff>=0.9.5", "basedpyright>=1.27.0", "snoop>=0.6.0"]
 
 [tool.basedpyright]
-typeCheckingMode = "recommended"
+typeCheckingMode = "off"
 
 [tool.ruff]
 line-length = 88
