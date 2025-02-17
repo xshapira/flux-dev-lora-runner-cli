@@ -40,16 +40,6 @@ def get_input(
     }
 
 
-# def generate_images(prompt: str, model: str, count: int) -> Any:  # pyright: ignore [reportExplicitAny, reportAny]
-#     """Generates images using the specified model and prompt."""
-#     input_data = get_input(prompt, model, count)
-#     replicate = Client(api_token=REPLICATE_API_TOKEN)
-#     return replicate.run(  # pyright: ignore [reportAny]
-#         "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
-#         input=input_data,
-#     )
-
-
 def generate_images(prompt: str, model: str, count: int) -> Any:  # pyright: ignore [reportExplicitAny, reportAny]
     """Generates images using the specified model and prompt."""
     input_data = get_input(prompt, model, count)
