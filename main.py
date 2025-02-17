@@ -11,14 +11,16 @@ import uuid
 from collections.abc import Iterator
 from typing import Any, TypedDict
 
-import replicate
+from replicate.client import Client
 
+from config import config
 from logger import setup_logger
 
 log = setup_logger(__name__)
 
 DEFAULT_MODEL = "xshapira/me-v1"
 DEFAULT_COUNT = 1
+REPLICATE_API_TOKEN = config["replicate_api_token"]
 
 
 class ModelDict(TypedDict):
@@ -40,6 +42,7 @@ def get_input(
 def generate_images(prompt: str, model: str, count: int) -> Any:  # pyright: ignore [reportExplicitAny, reportAny]
     """Generates images using the specified model and prompt."""
     input_data = get_input(prompt, model, count)
+    replicate = Client(api_token=REPLICATE_API_TOKEN)
     return replicate.run(  # pyright: ignore [reportAny]
         "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
         input=input_data,
