@@ -35,7 +35,7 @@ def get_input(
 ) -> ModelDict:
     return {
         "prompt": prompt,
-        "hr_lora": model,
+        "hf_lora": model,
         "num_outputs": count,
     }
 
