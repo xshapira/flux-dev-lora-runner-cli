@@ -4,7 +4,10 @@ version = "0.0.2"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["replicate>=1.0.4"]
+dependencies = [
+    "replicate>=1.0.4",
+    "tqdm>=4.67.1",
+]
 
 [tool.uv]
 dev-dependencies = ["ruff>=0.9.5", "basedpyright>=1.27.0", "snoop>=0.6.0"]

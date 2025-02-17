@@ -12,6 +12,7 @@ from collections.abc import Iterator
 from typing import Any, TypedDict
 
 from replicate.client import Client
+from tqdm import tqdm
 
 from config import config
 from logger import setup_logger
@@ -39,14 +40,29 @@ def get_input(
     }
 
 
+# def generate_images(prompt: str, model: str, count: int) -> Any:  # pyright: ignore [reportExplicitAny, reportAny]
+#     """Generates images using the specified model and prompt."""
+#     input_data = get_input(prompt, model, count)
+#     replicate = Client(api_token=REPLICATE_API_TOKEN)
+#     return replicate.run(  # pyright: ignore [reportAny]
+#         "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
+#         input=input_data,
+#     )
+
+
 def generate_images(prompt: str, model: str, count: int) -> Any:  # pyright: ignore [reportExplicitAny, reportAny]
     """Generates images using the specified model and prompt."""
     input_data = get_input(prompt, model, count)
     replicate = Client(api_token=REPLICATE_API_TOKEN)
-    return replicate.run(  # pyright: ignore [reportAny]
-        "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
-        input=input_data,
-    )
+    with tqdm(
+        total=count, desc="Generating images", unit="image", colour="#4ABDA6"
+    ) as pbar:
+        for image in replicate.run(  # pyright: ignore [reportAny]
+            "lucataco/flux-dev-lora:091495765fa5ef2725a175a57b276ec30dc9d39c22d30410f2ede68a3eab66b3",
+            input=input_data,
+        ):
+            yield image
+            pbar.update(1)
 
 
 def save_images(images: Iterator[Any], prompt: str, output_dir: str = "output") -> None:  # pyright: ignore [reportExplicitAny]
