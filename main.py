@@ -27,7 +27,7 @@ REPLICATE_API_TOKEN = config["replicate_api_token"]
 
 class ModelDict(TypedDict):
     prompt: str
-    hr_lora: str
+    hf_lora: str
     num_outputs: int
 
 
