@@ -60,7 +60,8 @@ def save_images(images: Iterator[Any], prompt: str, output_dir: str = "output") 
         file_id = uuid.uuid4().hex[:5]
         file_path = output_path / f"{prompt_slug}-{file_id}.webp"
         with open(file_path, "wb") as file:
-            file.write(item)  # pyright: ignore [reportAny, reportUnusedCallResult]
+            image_data = item.read()
+            file.write(image_data)  # pyright: ignore [reportAny, reportUnusedCallResult]
             log.info(f"Saved photo {file_path}")
 
 
